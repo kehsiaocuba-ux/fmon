@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fmon"
+version = "2.0.0"
+description = "Folder audit: snapshot folders, detect changes, scheduled monitoring, audit log, GUI"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "Alejandro Castaneda"}]
+
+[project.scripts]
+fmon = "fmon.cli:main"
+
+[project.gui-scripts]
+fmon-gui = "fmon.gui:main"

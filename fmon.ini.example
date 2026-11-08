@@ -1,0 +1,33 @@
+; fmon configuration example.
+; One section per monitored folder; the section name is the target name and
+; must be unique. It is also used as the default control file name (<name>.ctl).
+; Targets are added automatically whenever fmon creates a control file
+; ("fmon DIR -o FILE"); they can also be managed with "fmon config ...".
+
+[fmon]
+; Where control files are stored by default. Relative paths are resolved
+; against the directory containing this .ini file.
+; For tamper protection, use a directory that is writable only by the
+; administrator (e.g. /var/lib/fmon, owned by root, mode 0755 or stricter).
+control_dir = /var/lib/fmon
+; Audit log (default: fmon.log next to this file, rotated above 1M, kept forever)
+log_file = /var/log/fmon/fmon.log
+log_max_size = 5M
+; delete rotated logs older than 60 days (0 = keep them forever)
+log_keep_days = 60
+
+[usr]
+path = /usr
+; control file -> /var/lib/fmon/usr.ctl
+
+[home]
+path = /home
+; relative control_file -> inside control_dir
+control_file = home-baseline.ctl
+; checked every 15 minutes while the GUI or "fmon watch" runs (s/m/h/d, off)
+schedule = 15m
+
+[etc]
+path = /etc
+; absolute control_file -> used as-is
+control_file = /root/fmon/etc.ctl
