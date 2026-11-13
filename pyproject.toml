@@ -16,3 +16,10 @@ fmon = "fmon.cli:main"
 
 [project.gui-scripts]
 fmon-gui = "fmon.gui:main"
+
+[project.optional-dependencies]
+build = ["pyinstaller>=6"]
+test = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

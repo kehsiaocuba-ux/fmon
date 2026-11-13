@@ -1,7 +1,16 @@
 # fmon
 Directory state snapshot generator and recursive folder checker.
 
-fmon is open source (MIT license), by Alejandro Castaneda.
+fmon is open source (MIT license), by Alejandro Castaneda. It runs on
+Windows, Linux and macOS (Python 3.9+; the GUI needs Tk, see
+`packaging/README.md`).
+
+## Installation
+
+    pip install .                       # 'fmon' and 'fmon-gui' commands (any platform)
+    .\packaging\windows\build.ps1       # Windows: fmon.exe, fmon-gui.exe and an installer
+                                        # (setup.exe with Inno Setup, else a portable ZIP + install.ps1)
+    packaging/linux/                    # Linux: .desktop entry and a systemd unit for 'fmon watch'
 
 ## Getting help
 

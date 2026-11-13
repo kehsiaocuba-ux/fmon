@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import pytest
 from fmon import config as fmon_config
@@ -50,6 +51,19 @@ def test_schedule_option_in_config(isolated_user_config, tmp_path, capsys):
 
     cli.main(["config", "set", "website", "schedule", "off"])
     assert load_config(str(isolated_user_config))[0].schedule is None
+
+
+def test_fmon_executable_frozen(monkeypatch, tmp_path):
+    assert fmon_schedule.fmon_executable() == [sys.executable, "-m", "fmon"]
+    exe_dir = tmp_path / "dist"
+    exe_dir.mkdir()
+    monkeypatch.setattr(sys, "frozen", True, raising=False)
+    monkeypatch.setattr(sys, "executable", str(exe_dir / ("fmon-gui.exe" if os.name == "nt" else "fmon-gui")))
+    assert fmon_schedule.fmon_executable() == [sys.executable]          # no CLI next to it: use itself
+    cli_exe = exe_dir / ("fmon.exe" if os.name == "nt" else "fmon")
+    cli_exe.write_text("")
+    assert fmon_schedule.fmon_executable() == [str(cli_exe)]             # the console CLI next to the GUI
+    assert fmon_schedule.fmon_command(["check"], "/c.ini") == [str(cli_exe), "check", "-f", "/c.ini"]
 
 
 def test_fmon_command_adds_config():

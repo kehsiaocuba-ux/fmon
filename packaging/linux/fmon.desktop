@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=fmon
+GenericName=Folder audit
+Comment=Snapshot folders, detect changes, scheduled monitoring, audit log
+Exec=fmon-gui
+Terminal=false
+Categories=System;Utility;Security;
+Keywords=audit;folder;monitor;integrity;

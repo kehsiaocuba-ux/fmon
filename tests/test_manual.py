@@ -94,3 +94,11 @@ def test_help_is_not_logged(tmp_path, monkeypatch):
 def test_page_without_tty_prints_plainly(capsys, monkeypatch):
     manual.page("hello")
     assert capsys.readouterr().out == "hello\n"
+
+
+def test_version_flag(capsys):
+    import fmon
+    with pytest.raises(SystemExit) as exc:
+        cli.main(["--version"])
+    assert exc.value.code == 0
+    assert capsys.readouterr().out.strip() == f"fmon {fmon.__version__}"

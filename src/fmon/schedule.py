@@ -22,9 +22,26 @@ EXIT_OK, EXIT_CHANGES, EXIT_ERROR = 0, 1, 2
 STATUS_TEXT = {EXIT_OK: "no changes", EXIT_CHANGES: "CHANGES", EXIT_ERROR: "error"}
 
 
+def fmon_executable():
+    """How to invoke the fmon command line from this process.
+
+    Normally `python -m fmon`. In a frozen build (PyInstaller/py2exe) there
+    is no interpreter: use the fmon console executable next to this one
+    (fmon.exe on Windows), or this executable itself if it is the CLI.
+    """
+    if getattr(sys, "frozen", False):
+        exe_dir = os.path.dirname(os.path.abspath(sys.executable))
+        name = "fmon.exe" if os.name == "nt" else "fmon"
+        candidate = os.path.join(exe_dir, name)
+        if os.path.isfile(candidate):
+            return [candidate]
+        return [sys.executable]
+    return [sys.executable, "-m", "fmon"]
+
+
 def fmon_command(args, config_path=None):
-    """Command line that runs fmon with the current interpreter."""
-    cmd = [sys.executable, "-m", "fmon"] + list(args)
+    """Command line that runs fmon with the current interpreter/executable."""
+    cmd = fmon_executable() + list(args)
     if config_path and "-f" not in args and "--config" not in args:
         cmd += ["-f", config_path]
     return cmd

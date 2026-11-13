@@ -1,0 +1,20 @@
+# systemd unit running the scheduled checks of a config file (fmon watch).
+#
+# Per user:   cp fmon-watch.service ~/.config/systemd/user/
+#             systemctl --user enable --now fmon-watch
+# System-wide (as root, with a locked /etc/fmon.ini and root-only control files):
+#             cp fmon-watch.service /etc/systemd/system/
+#             edit ExecStart to: fmon watch -f /etc/fmon.ini
+#             systemctl enable --now fmon-watch
+[Unit]
+Description=fmon scheduled folder checks
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=fmon watch
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target

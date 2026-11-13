@@ -3,6 +3,8 @@ import os
 import sys
 import time
 from datetime import datetime
+
+import fmon
 from fmon import config as fmon_config
 from fmon import log as fmon_log
 from fmon import manual
@@ -15,7 +17,7 @@ EXIT_CHANGES = 1
 EXIT_ERROR = 2
 
 COMMANDS = ("snapshot", "check", "config", "log", "help", "watch", "gui")
-HELP_FLAGS = ("-h", "--help")
+HELP_FLAGS = ("-h", "--help", "-V", "--version")
 
 
 class UsageError(Exception):
@@ -587,6 +589,7 @@ def build_parser():
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
+    parser.add_argument("-V", "--version", action="version", version=f"fmon {fmon.__version__}")
     sub = parser.add_subparsers(dest="command", metavar="COMMAND")
 
     def add_command(name, **kwargs):

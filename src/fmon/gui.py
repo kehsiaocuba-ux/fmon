@@ -7,6 +7,7 @@ are audit-logged exactly like terminal commands, tagged [gui].
 """
 import os
 import queue
+import sys
 import threading
 import time
 from datetime import datetime
@@ -1645,7 +1646,12 @@ def main(config_path=None, argv=None):
     if config_path is None:
         parser = argparse.ArgumentParser(prog="fmon-gui", description="fmon graphical application")
         parser.add_argument("-f", "--config", metavar="INI", help="Config file to open")
-        args = parser.parse_args(argv)
+        try:
+            args = parser.parse_args(argv)
+        except SystemExit:
+            if sys.stderr is None:   # windowed executable without a console
+                raise SystemExit(2)
+            raise
         config_path = args.config
     app = App(config_path)
     app.mainloop()
