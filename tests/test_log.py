@@ -37,9 +37,9 @@ def fields(line):
 
 def test_format_entry_structure():
     when = datetime(2026, 11, 7, 1, 2, 3)
-    line = fmon_log.format_entry("Info", "fmon test1", "snapshot saved", user="kehsi", when=when)
-    assert line == "Info    | 2026-11-07 01:02:03 | kehsi | fmon test1 | snapshot saved\n"
-    assert fields(line) == ["Info", "2026-11-07 01:02:03", "kehsi", "fmon test1", "snapshot saved"]
+    line = fmon_log.format_entry("Info", "fmon test1", "snapshot saved", user="alice", when=when)
+    assert line == "Info    | 2026-11-07 01:02:03 | alice | fmon test1 | snapshot saved\n"
+    assert fields(line) == ["Info", "2026-11-07 01:02:03", "alice", "fmon test1", "snapshot saved"]
 
 
 def test_format_entry_single_line_and_defaults():
@@ -54,10 +54,10 @@ def test_format_entry_single_line_and_defaults():
 
 def test_format_entry_with_details():
     when = datetime(2026, 11, 7, 1, 2, 3)
-    text = fmon_log.format_entry("Info", "fmon -c test2", "1 added", user="kehsi", when=when,
+    text = fmon_log.format_entry("Info", "fmon -c test2", "1 added", user="alice", when=when,
                                  details="fmon check: /x\n\nAdded: 1\n  another.txt  (size 34 B)\n")
     assert text == (
-        "Info    | 2026-11-07 01:02:03 | kehsi | fmon -c test2 | 1 added\n"
+        "Info    | 2026-11-07 01:02:03 | alice | fmon -c test2 | 1 added\n"
         "    fmon check: /x\n"
         "    Added: 1\n"
         "      another.txt  (size 34 B)\n"
@@ -113,7 +113,7 @@ def _write_at(settings, when, text):
 
 def test_rotation_names_files_by_time_span(tmp_path):
     path = tmp_path / "fmon.log"
-    settings = LogSettings(path=str(path), max_size=150, keep_days=5)  # ~2 entries per file
+    settings = LogSettings(path=str(path), max_size=150, keep_days=0)  # ~2 entries per file
     t = datetime(2026, 11, 6, 21, 0, 5)
     _write_at(settings, t, "entry 0")
     _write_at(settings, t.replace(hour=22, minute=30, second=0), "entry 1")

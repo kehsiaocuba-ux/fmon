@@ -194,9 +194,9 @@ COMMANDS = {
             user, command line and result, followed by the full report for
             checks:
 
-                Info    | 2026-11-06 23:02:02 | kehsi | fmon -c test2 | 1 added, 0 removed, 0 modified
-                    fmon check: C:\\Users\\kehsi\\test2
-                    Control file: C:\\Users\\kehsi\\test2.ctl
+                Info    | 2026-11-06 23:02:02 | alice | fmon -c test2 | 1 added, 0 removed, 0 modified
+                    fmon check: C:\\Users\\alice\\test2
+                    Control file: C:\\Users\\alice\\test2.ctl
                     Added: 1
                       another.txt  (size 34 B, perms 0666 (rw-rw-rw-))
                     Removed: 0

@@ -17,10 +17,10 @@ def make_log(path, count, start=datetime(2026, 11, 1, 8, 0, 0)):
 
 
 def test_parse_entry_roundtrip():
-    lines = ["Info    | 2026-11-07 01:02:03 | kehsi | fmon -c test2 | 1 added",
+    lines = ["Info    | 2026-11-07 01:02:03 | alice | fmon -c test2 | 1 added",
              "    fmon check: /x", "    Added: 1", "      another.txt  (size 34 B)"]
     e = logview.parse_entry(lines, source="fmon.log")
-    assert (e.level, e.user, e.command, e.result) == ("Info", "kehsi", "fmon -c test2", "1 added")
+    assert (e.level, e.user, e.command, e.result) == ("Info", "alice", "fmon -c test2", "1 added")
     assert e.time == datetime(2026, 11, 7, 1, 2, 3)
     assert e.details == ["fmon check: /x", "Added: 1", "  another.txt  (size 34 B)"]
     assert e.text == "\n".join(lines)

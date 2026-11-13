@@ -7,7 +7,7 @@ One entry per command. The first line has the fixed structure
 and may be followed by indented detail lines (e.g. the full check report,
 so the log shows exactly which files were added, removed or modified):
 
-    Info    | 2026-11-06 23:02:02 | kehsi | fmon -c test2 | C:\\...\\test2: 1 added, 0 removed, 0 modified
+    Info    | 2026-11-06 23:02:02 | alice | fmon -c test2 | C:\\...\\test2: 1 added, 0 removed, 0 modified
         fmon check: C:\\...\\test2
         Control file: C:\\...\\test2.ctl
         Added: 1

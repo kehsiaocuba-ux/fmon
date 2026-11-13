@@ -33,8 +33,8 @@ file (created on first use if it does not exist), named after the folder
 unless `-n NAME` is given:
 
     [test1]
-    path = C:\Users\kehsi\fmon_workspace\test1
-    control_file = C:\Users\kehsi\fmon_workspace\test1.ctl
+    path = C:\Users\alice\fmon_workspace\test1
+    control_file = C:\Users\alice\fmon_workspace\test1.ctl
 
 Snapshotting the same folder again reuses the entry; a different control
 file for the same folder updates it; a second folder with the same base
@@ -224,7 +224,7 @@ the form `TYPE | TIMESTAMP | USER | COMMAND | RESULT`; a check is followed
 by its full report (indented), so the log shows exactly which files were
 added, removed or modified, when, and by which user's command:
 
-    Info    | 2026-11-06 23:02:02 | kehsi | fmon -c test2 | C:\...\test2: 1 added, 1 removed, 0 modified
+    Info    | 2026-11-06 23:02:02 | alice | fmon -c test2 | C:\...\test2: 1 added, 1 removed, 0 modified
         fmon check: C:\...\test2
         Control file: C:\...\test2.ctl
         Added: 1
@@ -232,8 +232,8 @@ added, removed or modified, when, and by which user's command:
         Removed: 1
           old.txt  (size 3 B, perms 0666 (rw-rw-rw-))
         Modified: 0
-    Warning | 2026-11-06 23:05:09 | kehsi | fmon config set fmon control_dir /x | you are not permitted to modify C:\...\fmon.ini (read-only)
-    Error   | 2026-11-06 23:06:11 | kehsi | fmon -c nope.ctl | fmon: nope.ctl is neither a directory nor an existing control file
+    Warning | 2026-11-06 23:05:09 | alice | fmon config set fmon control_dir /x | you are not permitted to modify C:\...\fmon.ini (read-only)
+    Error   | 2026-11-06 23:06:11 | alice | fmon -c nope.ctl | fmon: nope.ctl is neither a directory nor an existing control file
 
 * `Info` - the command succeeded (a check that finds changes is a
   successful command; the changes are in the result and the report).
