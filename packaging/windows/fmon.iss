@@ -26,6 +26,7 @@ ArchitecturesInstallIn64BitMode=x64compatible
 ChangesEnvironment=yes
 UninstallDisplayName={#AppName}
 PrivilegesRequiredOverridesAllowed=dialog
+PrivilegesRequired=lowest
 
 [Tasks]
 Name: "addtopath"; Description: "Add fmon to the PATH (use 'fmon' in any terminal)"; GroupDescription: "Command line:"
